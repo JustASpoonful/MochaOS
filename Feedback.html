@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="https://img.icons8.com/fluency/96/coffee-beans-.png"> 
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Mocha OS - Feedback</title>
+  <style>
+    :root {
+        /* Catppuccin Mocha Palette */
+        --mocha-base: #1e1e2e;
+        --mocha-text: #cdd6f4;
+        --mocha-subtext: #a6adc8;
+        --mocha-overlay: #6c7086;
+        --mocha-surface: #313244;
+        --mocha-blue: #89b4fa;
+        --mocha-purple: #cba6f7;
+        --mocha-pink: #f5c2e7;
+        --mocha-red: #f38ba8;
+        --mocha-green: #a6e3a1;
+        --mocha-yellow: #f9e2af;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Fira Sans', sans-serif;
+      background-color: var(--mocha-base);
+      /* Animated Mesh Gradient Background (Same as Landing) */
+      background-image:
+          radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%),
+          radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%),
+          radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+      background-size: 150% 150%;
+      animation: bgAnimate 20s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* Prevent scroll on main body */
+      color: var(--mocha-text);
+    }
+
+    @keyframes bgAnimate {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Orbs */
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      z-index: 0;
+      animation: floatOrb 12s ease-in-out infinite;
+    }
+    body::before { background: var(--mocha-purple); top: -50px; left: -50px; }
+    body::after { background: var(--mocha-blue); bottom: -50px; right: -50px; animation-delay: -5s; }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(40px, -40px); }
+    }
+
+    /* Glass Card */
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 500px;
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--mocha-blue), var(--mocha-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: var(--mocha-subtext);
+      font-size: 0.9rem;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Form Elements */
+    label {
+        font-size: 0.85rem;
+        color: var(--mocha-subtext);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        background: rgba(20, 20, 30, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--mocha-text);
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 1rem;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: var(--mocha-purple);
+        box-shadow: 0 0 0 3px rgba(203, 166, 247, 0.2);
+        background: rgba(20, 20, 30, 0.8);
+    }
+
+    /* Custom Select Arrow */
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23cdd6f4%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 0.65em auto;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        margin-top: 1rem;
+        padding: 14px;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(135deg, var(--mocha-blue), var(--mocha-purple));
+        color: var(--mocha-base);
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(137, 180, 250, 0.3);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+    .back-link {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    .back-link a {
+        color: var(--mocha-overlay);
+        text-decoration: none;
+        transition: 0.2s;
+    }
+    .back-link a:hover { color: var(--mocha-text); }
+
+    /* Status Messages */
+    #status-msg {
+        display: none;
+        text-align: center;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+    .success { background: rgba(166, 227, 161, 0.2); color: var(--mocha-green); border: 1px solid var(--mocha-green); }
+    .error { background: rgba(243, 139, 168, 0.2); color: var(--mocha-red); border: 1px solid var(--mocha-red); }
+
+  </style>
+</head>
+<body>
+
+  <div class="glass-card">
+    <h1>Feedback Form</h1>
+    <p class="subtitle">Report a bug or request a new feature.</p>
+
+    <form id="feedbackForm">
+        <div class="input-group">
+            <label for="type">Submission Type</label>
+            <select id="type" required>
+                <option value="Bug Report">🐛 Bug Report</option>
+                <option value="Feature Request">✨ Feature Request</option>
+                <option value="General Feedback">💬 General Feedback</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="title">Subject</label>
+            <input type="text" id="title" placeholder="e.g., Calculator crashes on division by zero" required>
+        </div>
+
+        <div class="input-group">
+            <label for="desc">Description</label>
+            <textarea id="desc" rows="5" placeholder="Describe the issue or feature in detail..." required></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="user">Username (Optional)</label>
+            <input type="text" id="user" placeholder="Discord Tag or Name">
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fa-solid fa-paper-plane" style="margin-right:8px;"></i> Send 
+        </button>
+    </form>
+
+    <div id="status-msg"></div>
+
+    <div class="back-link">
+        <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Return to Bootloader</a>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // CONFIGURATION
+    // ==========================================
+    // REPLACE THIS URL WITH YOUR ACTUAL DISCORD WEBHOOK URL
+    const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE"; 
+    // ==========================================
+
+    const form = document.getElementById('feedbackForm');
+    const btn = document.getElementById('submitBtn');
+    const statusDiv = document.getElementById('status-msg');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (DISCORD_WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
+            showStatus("Configuration Error: Webhook URL not set in code.", "error");
+            return;
+        }
+
+        // Disable button
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Transmitting...';
+
+        // Gather Data
+        const type = document.getElementById('type').value;
+        const title = document.getElementById('title').value;
+        const desc = document.getElementById('desc').value;
+        const user = document.getElementById('user').value || "Anonymous User";
+
+        // Determine Color based on type
+        let colorInt = 5814783; // Default Blue
+        if (type === "Bug Report") colorInt = 15158332; // Red
+        else if (type === "Feature Request") colorInt = 10181046; // Purple
+
+        // Construct Payload
+        const payload = {
+            username: "Mocha OS Feedback Bot",
+            avatar_url: "https://img.icons8.com/fluency/96/coffee-beans-.png",
+            embeds: [
+                {
+                    title: `${type}: ${title}`,
+                    color: colorInt,
+                    fields: [
+                        { name: "User", value: user, inline: true },
+                        { name: "Type", value: type, inline: true },
+                        { name: "Description", value: desc }
+                    ],
+                    footer: {
+                        text: "Mocha OS • v1.2 Stable"
+                    },
+                    timestamp: new Date().toISOString()
+                }
+            ]
+        };
+
+        try {
+            const response = await fetch(DISCORD_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                showStatus("Payload received successfully! Thank you.", "success");
+                form.reset();
+            } else {
+                showStatus(`Transmission failed: ${response.status}`, "error");
+            }
+        } catch (error) {
+            console.error(error);
+            showStatus("Network Error: Unable to reach Discord servers.", "error");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane" style="margin-right:8px;"></i> Send Payload';
+        }
+    });
+
+    function showStatus(msg, type) {
+        statusDiv.innerText = msg;
+        statusDiv.className = type;
+        statusDiv.style.display = 'block';
+        setTimeout(() => {
+            statusDiv.style.display = 'none';
+        }, 5000);
+    }
+  </script>
+
+</body>
+</html>
