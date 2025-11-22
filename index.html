@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mocha OS</title>
+  <link rel="icon" href="yasu-icon.png" />
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    button {
+      padding: 16px 32px;
+      font-size: 18px;
+      background: #0af;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #08c;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="launchYasu()">Launch Yasu OS</button>
+
+  <script>
+    function launchYasu() {
+      const win = window.open("about:blank", "_blank");
+
+      if (!win) {
+        alert("Popup blocked. Please allow popups and try again.");
+        return;
+      }
+
+      fetch("abt-blank.html")
+        .then(res => res.text())
+        .then(html => {
+          win.document.open();
+          win.document.write(html);
+          win.document.close();
+        })
+        .catch(() => {
+          win.document.body.innerHTML = "<h1>Failed to load Yasu OS</h1>";
+        });
+    }
+  </script>
+</body>
+</html>
