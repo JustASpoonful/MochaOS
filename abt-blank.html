@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MochaOS</title>
+    <link rel="icon" href="faveicon.png">
+    <script>
+    // Attach a beforeunload event listener that asks for confirmation.
+    window.addEventListener("beforeunload", function (e) {
+      // Standard message (browsers may ignore this custom text).
+      var confirmationMessage = "Are you sure you want to leave this page?";
+      
+      // Some browsers require setting returnValue of the event.
+      e.returnValue = confirmationMessage; 
+      
+      // Return the confirmation message.
+      return confirmationMessage;
+    });
+  </script>
+    
+    <style>
+        /* Ensure the iframe takes up the full screen */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="MochaOS.html"></iframe>
+</body>
+</html>
