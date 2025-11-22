@@ -29,10 +29,10 @@
   </style>
 </head>
 <body>
-  <button onclick="launchYasu()">Launch Yasu OS</button>
+  <button onclick="launchMocha()">Launch Mocha OS</button>
 
   <script>
-    function launchYasu() {
+    function launchMocha() {
       const win = window.open("about:blank", "_blank");
 
       if (!win) {
@@ -40,7 +40,7 @@
         return;
       }
 
-      fetch("abt-blank.html")
+      fetch("MochaOS.html")
         .then(res => res.text())
         .then(html => {
           win.document.open();
@@ -48,7 +48,7 @@
           win.document.close();
         })
         .catch(() => {
-          win.document.body.innerHTML = "<h1>Failed to load Yasu OS</h1>";
+          win.document.body.innerHTML = "<h1>Failed to load Mocha OS</h1>";
         });
     }
   </script>
